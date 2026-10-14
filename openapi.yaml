@@ -1,0 +1,327 @@
+# SPDX-FileCopyrightText: Copyright Logically Magic Inc. <hello@logicallymagic.com>
+# SPDX-FileCopyrightText: Copyright Hamid Jahanzad <Hamid@Jahanzad.com>
+# SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
+# SPDX-License-Identifier: Apache-2.0
+
+openapi: 3.1.0
+info:
+  title: eBank Sentin8:BFF API
+  description: |
+    eBank Backend for Frontend (Sentin8:BFF) API surface.
+
+    All client-to-backend communication goes through Sentin8:BFF.
+    The Flutter app never sees OAuth tokens — Sentin8:BFF holds them server-side.
+
+    This contract defines the Sentin8:BFF auth and proxy routes used by the eBank
+    Flutter app. Backend service APIs (Bank8:Ledger, Bank8:Payments, Bank8:FDX, Sentin8:DB, Sentin8:Storage) are
+    proxied through Sentin8:BFF under /proxy/{service}/...
+
+    DCR is mandatory: every eBank instance registers an OAuth client with
+    Sentin8:Auth during setup.
+  version: 0.1.0
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://bff.bank8-ebank.{env}.{org}.sentin8.local
+    description: Per-instance Sentin8:BFF (eBank)
+    variables:
+      env:
+        default: prod
+      org:
+        default: acme
+
+paths:
+  /auth/login:
+    get:
+      summary: Start OAuth login flow
+      description: |
+        Redirects to Sentin8:Auth /oauth/authorize with PKCE S256.
+        Sentin8:BFF generates and stores the PKCE verifier in Redis.
+      responses:
+        '302':
+          description: Redirect to Sentin8:Auth authorize endpoint
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+
+  /auth/callback:
+    get:
+      summary: OAuth callback handler
+      description: |
+        Exchanges the authorization code for tokens (server-side).
+        Creates an encrypted session in Redis, sets __Host-bff-session cookie.
+        Redirects to the eBank home page.
+      parameters:
+        - name: code
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: state
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '302':
+          description: Redirect to eBank home
+    post:
+      summary: Programmatic callback (mobile)
+      description: |
+        Exchanges the authorization code for tokens and returns a session
+        token for mobile clients. Tokens are never returned to the client —
+        only an opaque session token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallbackRequest'
+      responses:
+        '200':
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallbackResponse'
+
+  /auth/session:
+    get:
+      summary: Get current session
+      description: |
+        Returns the current user's session info if signed in.
+        Used by the Flutter app to check auth state on mount.
+      responses:
+        '200':
+          description: Session info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+        '401':
+          description: Not signed in
+
+  /auth/refresh:
+    post:
+      summary: Refresh session
+      description: Transparently refreshes the access token server-side.
+      responses:
+        '200':
+          description: Session refreshed
+        '401':
+          description: Session invalid
+
+  /auth/sign-out:
+    post:
+      summary: Sign out
+      description: Terminates the Sentin8:BFF session and revokes tokens.
+      parameters:
+        - name: X-Sentin8:BFF-CSRF
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Signed out
+
+  /proxy/ledger/{path}:
+    parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Bank8:Ledger API path (e.g. v1/accounts)
+    get:
+      summary: Proxy to Bank8:Ledger (read)
+      responses:
+        '200':
+          description: Bank8:Ledger response
+        '403':
+          description: Scope denied (requires ledger: prefix scope)
+    post:
+      summary: Proxy to Bank8:Ledger (write)
+      parameters:
+        - name: X-Sentin8:BFF-CSRF
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Bank8:Ledger response
+        '409':
+          description: Idempotency conflict
+
+  /proxy/payments/{path}:
+    parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Bank8:Payments API path (e.g. v1/instructions)
+    get:
+      summary: Proxy to Bank8:Payments (read)
+      responses:
+        '200':
+          description: Bank8:Payments response
+    post:
+      summary: Proxy to Bank8:Payments (write)
+      parameters:
+        - name: X-Sentin8:BFF-CSRF
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Bank8:Payments response
+        '409':
+          description: Idempotency conflict
+
+  /proxy/fdx/{path}:
+    parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Bank8:FDX API path (e.g. v1/recipient/providers)
+    get:
+      summary: Proxy to Bank8:FDX (read)
+      responses:
+        '200':
+          description: Bank8:FDX response
+    post:
+      summary: Proxy to Bank8:FDX (write)
+      parameters:
+        - name: X-Sentin8:BFF-CSRF
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Bank8:FDX response
+
+  /proxy/db/{path}:
+    parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Proxy to Sentin8:DB (read)
+      responses:
+        '200':
+          description: Sentin8:DB response
+    post:
+      summary: Proxy to Sentin8:DB (write)
+      parameters:
+        - name: X-Sentin8:BFF-CSRF
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sentin8:DB response
+
+  /proxy/storage/{path}:
+    parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Proxy to Sentin8:Storage (read)
+      responses:
+        '200':
+          description: Sentin8:Storage response
+    post:
+      summary: Proxy to Sentin8:Storage (write)
+      parameters:
+        - name: X-Sentin8:BFF-CSRF
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sentin8:Storage response
+
+  /health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: OK
+
+  /readiness:
+    get:
+      summary: Readiness check
+      responses:
+        '200':
+          description: Ready
+
+components:
+  schemas:
+    CallbackRequest:
+      type: object
+      required: [code, state, redirectUri, clientId, verifier, authDomain]
+      properties:
+        code:
+          type: string
+        state:
+          type: string
+        redirectUri:
+          type: string
+          format: uri
+        clientId:
+          type: string
+        verifier:
+          type: string
+          description: PKCE code verifier
+        authDomain:
+          type: string
+
+    CallbackResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        sessionToken:
+          type: string
+          description: Opaque session token for mobile
+
+    SessionResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        scope:
+          type: string
+          description: Space-separated scopes
+        csrfToken:
+          type: string
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        displayName:
+          type: string
+        avatarUrl:
+          type: string
+          format: uri
