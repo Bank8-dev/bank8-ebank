@@ -34,7 +34,7 @@ graph TD
     M --> C[EBankContext — inherited app state]
     C --> S[EBankServices — six BFF ApiClients]
 
-    subgraph Via Sentin8:BFF — session cookie, tokens server-side
+    subgraph SGcvnbup["Via Sentin8:BFF — session cookie, tokens server-side"]
         S --> L[bank8-ledger]
         S --> P[bank8-payments]
         S --> F[bank8-fdx]

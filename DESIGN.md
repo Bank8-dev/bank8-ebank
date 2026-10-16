@@ -40,7 +40,7 @@ graph TD
 
 ```mermaid
 graph TD
-    subgraph eBank process (Flutter web)
+    subgraph SGectf6y["eBank process (Flutter web)"]
         MAIN[main.dart — bootstrap + theme] --> CTX[EBankContext inherited provider]
         CTX --> SVC[EBankServices six BffApiClients]
         CTX --> AUTH[AuthProvider — BFF session]
