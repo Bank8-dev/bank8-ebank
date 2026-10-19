@@ -10,7 +10,7 @@ info:
     eBank Backend for Frontend (Sentin8:BFF) API surface.
 
     All client-to-backend communication goes through Sentin8:BFF.
-    The Flutter app never sees OAuth tokens — Sentin8:BFF holds them server-side.
+    The Flutter app never sees OAuth tokens - Sentin8:BFF holds them server-side.
 
     This contract defines the Sentin8:BFF auth and proxy routes used by the eBank
     Flutter app. Backend service APIs (Bank8:Ledger, Bank8:Payments, Bank8:FDX, Sentin8:DB, Sentin8:Storage) are
@@ -72,7 +72,7 @@ paths:
       summary: Programmatic callback (mobile)
       description: |
         Exchanges the authorization code for tokens and returns a session
-        token for mobile clients. Tokens are never returned to the client —
+        token for mobile clients. Tokens are never returned to the client -
         only an opaque session token.
       requestBody:
         required: true

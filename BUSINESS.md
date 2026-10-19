@@ -1,4 +1,4 @@
-# Bank8:eBank — Business Requirements & Functionality
+# Bank8:eBank - Business Requirements & Functionality
 
 > Audience: product owners, business analysts, and anyone evaluating what
 > Bank8:eBank **does for the business**. For architecture read `README.md`;
@@ -13,7 +13,7 @@
   and revokes FDX data-sharing consent for external fintech providers from
   inside their own bank app.
 - Keep every credential, token, and byte of tenant data under platform
-  control — the app itself carries nothing sensitive.
+  control - the app itself carries nothing sensitive.
 
 ## 2. Business Scope (What the Service Provides)
 
@@ -52,7 +52,7 @@
 | Onboarding | Customer provisioning | A signed-in subject is linked to exactly one ledger customer per environment; replays never duplicate it. |
 | Deposits | Account opening | A customer may open any catalog product they are eligible for; the account appears immediately in the dashboard. |
 | Servicing | Balances & transactions | A customer sees only their own accounts; internal bank plumbing accounts are invisible. |
-| Transfers | Money movement | Every transfer is idempotent — a retried submission can never double-post. |
+| Transfers | Money movement | Every transfer is idempotent - a retried submission can never double-post. |
 | Payments | External payment visibility | Customers see payments and payees recorded by the payment engine; they cannot corrupt payment state. |
 | Statements | Document access | Statements download through short-lived signed URLs only. |
 | Open banking (customer) | Consent control | The customer can list every active data-sharing consent and revoke any of them instantly. |
@@ -71,7 +71,7 @@ Business events the app triggers *upstream* by performing operations:
 | Product activation / override (staff) | Ledger product event (Bank8:Ledger) |
 
 **Inbound (consumed):** notification events delivered over SSE
-(`sentin8:notification.received`, `sentin8:notification.read`) — used to keep
+(`sentin8:notification.received`, `sentin8:notification.read`) - used to keep
 the inbox unread badge live.
 
 ## 5. Business Rules & Invariants
@@ -79,7 +79,7 @@ the inbox unread badge live.
 1. No credential, token, or refresh token ever reaches the customer client.
 2. A customer sees only their own accounts (internal bank accounts are never
    exposed to the customer surface).
-3. Every money movement is idempotent — retries cannot double-post.
+3. Every money movement is idempotent - retries cannot double-post.
 4. A customer can always see and revoke every consent sharing their data.
 5. Admin pages are staff-only; customers cannot reach them (enforced by the
    BFF, not just hidden in the UI).

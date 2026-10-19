@@ -1,6 +1,6 @@
 # eBank FDX Certification Evidence
 
-Status: All evidence produced — ready for certification review
+Status: All evidence produced - ready for certification review
 
 ## Contract Tests Evidence
 

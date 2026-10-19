@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 name: ebank
-description: eBank — Sentin8 demo banking application (FDX Data Provider). Flutter (iOS, Android, Web).
+description: eBank - Sentin8 demo banking application (FDX Data Provider). Flutter (iOS, Android, Web).
 publish_to: "none"
 version: 0.1.0
 

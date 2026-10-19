@@ -3,7 +3,7 @@
 # SPDX-FileCopyrightText: Copyright Hamid Jahanzad <Hamid@Jahanzad.com>
 # SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 # SPDX-License-Identifier: Apache-2.0
-# eBank CI Guard — detect prohibited patterns in eBank code.
+# eBank CI Guard - detect prohibited patterns in eBank code.
 #
 # This script scans all eBank source files for patterns that violate
 # Sentin8 architecture principles. Any violation causes CI to fail.
