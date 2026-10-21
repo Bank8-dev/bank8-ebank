@@ -13,7 +13,7 @@ void main() {
     // Account opening orchestration (BFF → Ledger).
     test('EBankServices provides Ledger client for account operations', () {
       final services = EBankServices(
-        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.sentin8.local',
+        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev',
       );
       // Verify the Ledger client is available for account opening
       expect(services.ledger, isNotNull);
@@ -25,7 +25,7 @@ void main() {
     // Money movement orchestration (BFF → Payments → Ledger).
     test('EBankServices provides Payments client for payment operations', () {
       final services = EBankServices(
-        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.sentin8.local',
+        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev',
       );
       expect(services.payments, isNotNull);
       expect(services.payments.serviceName, equals('bank8-payments'));
@@ -53,7 +53,7 @@ void main() {
     // Consent flow: authorization → token exchange → provider API access.
     test('EBankServices provides FDX client for consent operations', () {
       final services = EBankServices(
-        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.sentin8.local',
+        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev',
       );
       expect(services.fdx, isNotNull);
       expect(services.fdx.serviceName, equals('bank8-fdx'));
@@ -64,7 +64,7 @@ void main() {
     // Provider data reads (accounts, transactions, statements, customers).
     test('All proxy services available for FDX provider data access', () {
       final services = EBankServices(
-        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.sentin8.local',
+        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev',
       );
       expect(services.fdx, isNotNull);
       expect(services.ledger, isNotNull); // FDX maps data from Ledger
@@ -76,7 +76,7 @@ void main() {
     // Money movement writes with idempotency.
     test('Payments and FDX clients available for money movement writes', () {
       final services = EBankServices(
-        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.sentin8.local',
+        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev',
       );
       // FDX receives the write request, validates consent, calls Payments
       expect(services.fdx, isNotNull);

@@ -17,7 +17,7 @@ void main() {
     late BffApiClient storage;
 
     setUp(() {
-      const bffBaseUrl = 'https://bff.bank8-ebank.prod.acme.sentin8.local';
+      const bffBaseUrl = 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev';
       ledger = BffApiClient(bffBaseUrl: bffBaseUrl, serviceName: 'bank8-ledger');
       payments = BffApiClient(bffBaseUrl: bffBaseUrl, serviceName: 'bank8-payments');
       fdx = BffApiClient(bffBaseUrl: bffBaseUrl, serviceName: 'bank8-fdx');
@@ -50,7 +50,7 @@ void main() {
   group('EBankServices', () {
     test('Creates all 6 service clients', () {
       final services = EBankServices(
-        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.sentin8.local',
+        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev',
       );
       expect(services.ledger.serviceName, equals('bank8-ledger'));
       expect(services.payments.serviceName, equals('bank8-payments'));
@@ -62,9 +62,9 @@ void main() {
 
     test('Strips trailing slashes from BFF base URL', () {
       final services = EBankServices(
-        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.sentin8.local///',
+        bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev///',
       );
-      expect(services.ledger.bffBaseUrl, equals('https://bff.bank8-ebank.prod.acme.sentin8.local'));
+      expect(services.ledger.bffBaseUrl, equals('https://bff.bank8-ebank.prod.acme.local.sentin8.dev'));
     });
   });
 

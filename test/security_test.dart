@@ -20,16 +20,16 @@ void main() {
 
     test('_extractDomain extracts from app hostname', () {
       // Test via fetchRuntimeContext's internal helper (indirectly)
-      // hostname "prod.acme.ebank.app.sentin8.local" should extract "sentin8.local"
-      final hostname = 'prod.acme.ebank.app.sentin8.local';
+      // hostname "prod.acme.ebank.app.local.sentin8.dev" should extract "local.sentin8.dev"
+      final hostname = 'prod.acme.ebank.app.local.sentin8.dev';
       final domain = _extractDomainPublic(hostname);
-      expect(domain, equals('sentin8.local'));
+      expect(domain, equals('local.sentin8.dev'));
     });
 
     test('_extractDomain handles missing app segment', () {
-      final hostname = 'ebank.sentin8.local';
+      final hostname = 'ebank.local.sentin8.dev';
       final domain = _extractDomainPublic(hostname);
-      expect(domain, equals('sentin8.local'));
+      expect(domain, equals('local.sentin8.dev'));
     });
   });
 
@@ -97,11 +97,11 @@ String _extractDomainPublic(String hostname) {
   final appIndex = hostname.indexOf('.app.');
   if (appIndex == -1) {
     final sentin8Index = hostname.indexOf('.sentin8.');
-    if (sentin8Index != -1) return 'sentin8.local';
-    return 'sentin8.local';
+    if (sentin8Index != -1) return 'local.sentin8.dev';
+    return 'local.sentin8.dev';
   }
   // Strip the '.app.' prefix (5 chars) — everything after it is the platform
-  // domain (e.g. 'prod.acme.ebank.app.sentin8.local' → 'sentin8.local').
+  // domain (e.g. 'prod.acme.ebank.app.local.sentin8.dev' → 'local.sentin8.dev').
   return hostname.substring(appIndex + 5);
 }
 

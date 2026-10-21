@@ -23,7 +23,7 @@ info:
     name: Proprietary
 
 servers:
-  - url: https://bff.bank8-ebank.{env}.{org}.sentin8.local
+  - url: https://bff.bank8-ebank.{env}.{org}.local.sentin8.dev
     description: Per-instance Sentin8:BFF (eBank)
     variables:
       env:
