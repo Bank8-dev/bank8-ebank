@@ -46,9 +46,9 @@ void main() {
       expect(_hasScope(scopes, 'bank8:payments:'), isTrue);
     });
 
-    test('FDX proxy requires bank8:fdx: prefix scope', () {
-      const scopes = ['bank8:fdx:provider:read', 'openid'];
-      expect(_hasScope(scopes, 'bank8:fdx:'), isTrue);
+    test('FDX proxy requires openfin8:ca: prefix scope', () {
+      const scopes = ['openfin8:ca:provider:read', 'openid'];
+      expect(_hasScope(scopes, 'openfin8:ca:'), isTrue);
     });
 
     test('Missing scope is rejected', () {

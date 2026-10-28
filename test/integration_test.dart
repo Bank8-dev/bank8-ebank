@@ -56,7 +56,7 @@ void main() {
         bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev',
       );
       expect(services.fdx, isNotNull);
-      expect(services.fdx.serviceName, equals('bank8-fdx'));
+      expect(services.fdx.serviceName, equals('openfin8-ca'));
     });
   });
 

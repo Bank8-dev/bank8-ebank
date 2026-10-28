@@ -20,7 +20,7 @@ void main() {
       const bffBaseUrl = 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev';
       ledger = BffApiClient(bffBaseUrl: bffBaseUrl, serviceName: 'bank8-ledger');
       payments = BffApiClient(bffBaseUrl: bffBaseUrl, serviceName: 'bank8-payments');
-      fdx = BffApiClient(bffBaseUrl: bffBaseUrl, serviceName: 'bank8-fdx');
+      fdx = BffApiClient(bffBaseUrl: bffBaseUrl, serviceName: 'openfin8-ca');
       db = BffApiClient(bffBaseUrl: bffBaseUrl, serviceName: 'db');
       storage = BffApiClient(bffBaseUrl: bffBaseUrl, serviceName: 'storage');
     });
@@ -35,7 +35,7 @@ void main() {
     });
 
     test('FDX client builds correct proxy URL', () {
-      expect(fdx.serviceName, equals('bank8-fdx'));
+      expect(fdx.serviceName, equals('openfin8-ca'));
     });
 
     test('DB client builds correct proxy URL', () {
@@ -54,7 +54,7 @@ void main() {
       );
       expect(services.ledger.serviceName, equals('bank8-ledger'));
       expect(services.payments.serviceName, equals('bank8-payments'));
-      expect(services.fdx.serviceName, equals('bank8-fdx'));
+      expect(services.fdx.serviceName, equals('openfin8-ca'));
       expect(services.db.serviceName, equals('db'));
       expect(services.storage.serviceName, equals('storage'));
       expect(services.post.serviceName, equals('post'));

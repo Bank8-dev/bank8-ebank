@@ -62,7 +62,7 @@ class EBankContext extends ChangeNotifier {
   /// Ensure a Ledger customer row exists for the signed-in user.
   /// Called by the app before account opening (e.g. product_detail_page).
   /// Idempotent: Ledger returns 409 if the customer already exists, which
-  /// we treat as success. Only eBank calls this — eFintech doesn't use Ledger.
+  /// we treat as success. Only eBank calls this — eOpenCA doesn't use Ledger.
   Future<void> ensureLedgerCustomer() async {
     final user = auth.user;
     final s = services;

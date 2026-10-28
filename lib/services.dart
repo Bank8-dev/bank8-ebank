@@ -47,7 +47,7 @@ class EBankServices {
     return EBankServices._(
       ledger: BffApiClient(bffBaseUrl: base, serviceName: 'bank8-ledger', csrfToken: csrfToken, correlationId: correlationId),
       payments: BffApiClient(bffBaseUrl: base, serviceName: 'bank8-payments', csrfToken: csrfToken, correlationId: correlationId),
-      fdx: BffApiClient(bffBaseUrl: base, serviceName: 'bank8-fdx', csrfToken: csrfToken, correlationId: correlationId),
+      fdx: BffApiClient(bffBaseUrl: base, serviceName: 'openfin8-ca', csrfToken: csrfToken, correlationId: correlationId),
       db: BffApiClient(bffBaseUrl: base, serviceName: 'db', csrfToken: csrfToken, correlationId: correlationId),
       storage: BffApiClient(bffBaseUrl: base, serviceName: 'storage', csrfToken: csrfToken, correlationId: correlationId),
       post: BffApiClient(bffBaseUrl: base, serviceName: 'post', csrfToken: csrfToken, correlationId: correlationId),

@@ -4,8 +4,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 // eBank FDX hooks — FDX Data Provider API access via BFF proxy.
-// eFintech-style FDX hooks are shared with the recipient app; eBank uses the
-// provider-side surface (consents, capability, recipients).
+// Recipient-style FDX hooks are shared with eOpenCA (openfin8-eopenca);
+// eBank uses the provider-side surface (consents, capability, recipients).
 //
 // eBank is an FDX Data Provider. FDX hosts the /fdx/v6 provider routes,
 // enforces consent, and maps data from Ledger/Payments.
