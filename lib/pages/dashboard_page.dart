@@ -26,8 +26,8 @@ double _parseBalance(Map<String, dynamic> account) {
   return minor / 100;
 }
 
-/// Customer dashboard — shows account overview, balances, alerts.
-/// Dashboard — accounts overview with balances
+/// Customer dashboard - shows account overview, balances, alerts.
+/// Dashboard - accounts overview with balances
 ///
 /// Data is fetched via BFF → Ledger API (proxy route /proxy/ledger/...)
 class DashboardPage extends StatefulWidget {

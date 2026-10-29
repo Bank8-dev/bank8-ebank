@@ -3,7 +3,7 @@
 # SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 # SPDX-License-Identifier: Apache-2.0
 
-# eBank Dockerfile — Flutter web build
+# eBank Dockerfile  -  Flutter web build
 FROM ghcr.io/cirruslabs/flutter:3.22.0 AS build
 
 WORKDIR /app

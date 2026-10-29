@@ -3,8 +3,8 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank account detail page — full account details with balances and transactions.
-// Account detail — balances and transaction timeline.
+// eBank account detail page - full account details with balances and transactions.
+// Account detail - balances and transaction timeline.
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../app_context.dart';
@@ -199,11 +199,11 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
         children: [
           const Text('Account Details', style: Sentin8Text.headlineMedium),
           const SizedBox(height: Sentin8Spacing.md),
-          _infoRow('Type', account['account_type'] as String? ?? account['product_type'] as String? ?? '—'),
-          _infoRow('Status', account['status'] as String? ?? '—'),
-          _infoRow('Nickname', account['nickname'] as String? ?? '—'),
-          _infoRow('Currency', account['denomination'] as String? ?? '—'),
-          _infoRow('Opened', account['opened_at'] as String? ?? '—'),
+          _infoRow('Type', account['account_type'] as String? ?? account['product_type'] as String? ?? ' - '),
+          _infoRow('Status', account['status'] as String? ?? ' - '),
+          _infoRow('Nickname', account['nickname'] as String? ?? ' - '),
+          _infoRow('Currency', account['denomination'] as String? ?? ' - '),
+          _infoRow('Opened', account['opened_at'] as String? ?? ' - '),
         ],
       ),
     );

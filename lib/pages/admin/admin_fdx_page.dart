@@ -3,8 +3,8 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank admin FDX page — provider profile, recipient registration, consent monitoring.
-// Admin FDX provider management — provider profile, recipients, consents.
+// eBank admin FDX page - provider profile, recipient registration, consent monitoring.
+// Admin FDX provider management - provider profile, recipients, consents.
 import 'package:flutter/material.dart';
 import '../../theme.dart';
 import '../../app_context.dart';
@@ -75,8 +75,8 @@ class _AdminFdxPageState extends State<AdminFdxPage> {
               const Text('Provider Profile', style: Sentin8Text.headlineMedium),
               const SizedBox(height: Sentin8Spacing.md),
               _infoRow('Brand Name', data['brandName'] as String? ?? 'eBank'),
-              _infoRow('Issuer URL', data['issuer'] as String? ?? '—'),
-              _infoRow('JWKS URL', data['jwksUri'] as String? ?? '—'),
+              _infoRow('Issuer URL', data['issuer'] as String? ?? ' - '),
+              _infoRow('JWKS URL', data['jwksUri'] as String? ?? ' - '),
               _infoRow('FDX Version', data['fdxVersion'] as String? ?? '6.5'),
               _infoRow('Status', data['status'] as String? ?? 'available'),
             ],
@@ -139,7 +139,7 @@ class _AdminFdxPageState extends State<AdminFdxPage> {
               ),
               const SizedBox(width: Sentin8Spacing.sm),
               Expanded(
-                child: _buildStatCard('Authorization Rate', '—', Sentin8Colors.primary),
+                child: _buildStatCard('Authorization Rate', ' - ', Sentin8Colors.primary),
               ),
             ],
           ),

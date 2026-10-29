@@ -3,8 +3,8 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank FDX consent dashboard — customer view of who has access to their data.
-// FDX consent dashboard — view and revoke data-sharing consents.
+// eBank FDX consent dashboard - customer view of who has access to their data.
+// FDX consent dashboard - view and revoke data-sharing consents.
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../app_context.dart';

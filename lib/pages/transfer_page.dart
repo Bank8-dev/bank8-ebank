@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../app_context.dart';
 
-/// Transfer page — internal transfer between owned accounts.
-/// Transfer page — internal transfers through Ledger postings.
+/// Transfer page - internal transfer between owned accounts.
+/// Transfer page - internal transfers through Ledger postings.
 ///
 /// Uses Payments transfer API via BFF proxy route.
 /// Idempotency keys are mandatory for all money movement.
@@ -68,7 +68,7 @@ class _TransferPageState extends State<TransferPage> {
     setState(() => _submitting = true);
 
     try {
-      // Internal account-to-account transfer — a simple double-entry
+      // Internal account-to-account transfer - a simple double-entry
       // posting via Ledger. Payments instructions are for external payments
       // (SEPA, SWIFT, card) that need routing and orchestration; internal
       // transfers go directly to the ledger.

@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank — Messages page (Post inbox viewer).
+// eBank - Messages page (Post inbox viewer).
 //
 // Shows a list of messages from Post (notifications, emails, SMS, CIBA
 // approval requests, etc.) for the current user. Clicking a message opens
@@ -54,7 +54,7 @@ class _MessagesPageState extends State<MessagesPage> {
     final isRead = msg['read'] as bool? ?? false;
     setState(() { _selectedMessage = msg; _loadingDetail = true; });
     if (id != null) pushRoute('/messages/$id');
-    // Mark the message as read on the server (fire-and-forget — don't await).
+    // Mark the message as read on the server (fire-and-forget - don't await).
     // The SSE notification.read event will push the authoritative unread_count.
     // Decrement locally immediately for instant UI feedback.
     if (id != null && !isRead) {
@@ -114,7 +114,7 @@ class _MessagesPageState extends State<MessagesPage> {
         },
       );
     }
-    // No Scaffold — the eBank shell wraps content in SingleChildScrollView.
+    // No Scaffold - the eBank shell wraps content in SingleChildScrollView.
     // Using a Column with a header row + content avoids the nested
     // Scaffold-in-scroll-view height collapse.
     return Column(

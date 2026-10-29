@@ -3,8 +3,8 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank statements page — statement list and download via Storage signed URLs.
-// Statements — list and download via BFF → Storage signed URLs.
+// eBank statements page - statement list and download via Storage signed URLs.
+// Statements - list and download via BFF → Storage signed URLs.
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../app_context.dart';

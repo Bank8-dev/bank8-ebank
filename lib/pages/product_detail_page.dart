@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank product detail page — product details with account opening form.
+// eBank product detail page - product details with account opening form.
 // Shows key product info, asks necessary questions (currency, account name),
 // then opens the account via Ledger POST /v1/accounts.
 import 'package:flutter/material.dart';
@@ -64,7 +64,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
     try {
       // Ensure a Ledger customer row exists before opening an account.
-      // Only eBank calls this — the app decides which services it needs.
+      // Only eBank calls this - the app decides which services it needs.
       await widget.appContext.ensureLedgerCustomer();
 
       final productType = widget.product['productType'] ?? widget.product['type'] ?? '';
@@ -174,7 +174,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   const Text('Open Account', style: Sentin8Text.headlineMedium),
                   const SizedBox(height: Sentin8Spacing.md),
 
-                  // Account name field — pre-filled with the product name
+                  // Account name field - pre-filled with the product name
                   // as a sensible default. The customer can keep, edit,
                   // or clear it; clearing makes it required (enforced in
                   // _openAccount).
@@ -200,12 +200,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       isDense: true,
                     ),
                     items: const [
-                      DropdownMenuItem(value: 'CAD', child: Text('CAD — Canadian Dollar')),
-                      DropdownMenuItem(value: 'USD', child: Text('USD — US Dollar')),
-                      DropdownMenuItem(value: 'EUR', child: Text('EUR — Euro')),
-                      DropdownMenuItem(value: 'GBP', child: Text('GBP — British Pound')),
-                      DropdownMenuItem(value: 'AUD', child: Text('AUD — Australian Dollar')),
-                      DropdownMenuItem(value: 'AED', child: Text('AED — UAE Dirham')),
+                      DropdownMenuItem(value: 'CAD', child: Text('CAD - Canadian Dollar')),
+                      DropdownMenuItem(value: 'USD', child: Text('USD - US Dollar')),
+                      DropdownMenuItem(value: 'EUR', child: Text('EUR - Euro')),
+                      DropdownMenuItem(value: 'GBP', child: Text('GBP - British Pound')),
+                      DropdownMenuItem(value: 'AUD', child: Text('AUD - Australian Dollar')),
+                      DropdownMenuItem(value: 'AED', child: Text('AED - UAE Dirham')),
                     ],
                     onChanged: (v) => setState(() => _currency = v ?? 'CAD'),
                   ),

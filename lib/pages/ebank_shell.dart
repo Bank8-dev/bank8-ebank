@@ -347,11 +347,11 @@ class _EBankShellState extends State<EBankShell> {
     // the `ebank-admin` role, which App provisions in `auth_roles`
     // when the listing is installed in a target org/env.
     //
-    // We use an exact match against `ebank:admin` — a substring match
+    // We use an exact match against `ebank:admin` - a substring match
     // would false-positive on ebank customer accounts that hold
     // `fdx:admin` / `fdx:provider:write:admin` etc.
     //
-    // Per SDK8 §3.9, server enforcement is mandatory — this client
+    // Per SDK8 §3.9, server enforcement is mandatory - this client
     // guard only hides UI affordances.
     return appContext.auth.state.scopes.contains('ebank:admin');
   }

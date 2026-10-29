@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank auth provider — re-exported from sentin8.
+// eBank auth provider - re-exported from sentin8.
 //
 // AuthProvider and EBankUser are re-exported as aliases for
 // BffAuthProvider and AppUser for backward compatibility.

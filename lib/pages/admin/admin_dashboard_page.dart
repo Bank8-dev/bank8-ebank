@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import '../../theme.dart';
 import '../../app_context.dart';
 
-/// Admin dashboard page — instance status, controls, OAuth client summary.
-/// Admin dashboard — instance controls
+/// Admin dashboard page - instance status, controls, OAuth client summary.
+/// Admin dashboard - instance controls
 ///
 /// Admin access is restricted to staff + ebank-admin Auth security roles.
-/// BFF verifies role membership server-side — this page is a convenience guard.
+/// BFF verifies role membership server-side - this page is a convenience guard.
 /// (SDK8 §3.9: server enforcement is mandatory, client guards are convenience only)
 class AdminDashboardPage extends StatefulWidget {
   final EBankContext appContext;

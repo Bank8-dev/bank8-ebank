@@ -24,7 +24,7 @@ double _parseBalance(Map<String, dynamic> account) {
   return minor / 100;
 }
 
-/// Account list page — shows all customer accounts with navigation to detail.
+/// Account list page - shows all customer accounts with navigation to detail.
 /// Account list screen with navigation to detail.
 class AccountListPage extends StatefulWidget {
   final EBankContext appContext;

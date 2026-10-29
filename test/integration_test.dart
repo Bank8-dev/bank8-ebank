@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank integration tests — account opening, money movement, FDX consent flows.
+// eBank integration tests - account opening, money movement, FDX consent flows.
 // Integration tests for key orchestration paths.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ebank/services.dart';

@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank app context — central runtime state
+// eBank app context - central runtime state
 // Holds the AppRuntimeContext, AuthProvider, and EBankServices
 // Provides them to the widget tree via InheritedWidget
 
@@ -62,7 +62,7 @@ class EBankContext extends ChangeNotifier {
   /// Ensure a Ledger customer row exists for the signed-in user.
   /// Called by the app before account opening (e.g. product_detail_page).
   /// Idempotent: Ledger returns 409 if the customer already exists, which
-  /// we treat as success. Only eBank calls this — eOpenCA doesn't use Ledger.
+  /// we treat as success. Only eBank calls this - eOpenCA doesn't use Ledger.
   Future<void> ensureLedgerCustomer() async {
     final user = auth.user;
     final s = services;
@@ -73,7 +73,7 @@ class EBankContext extends ChangeNotifier {
         'email': user.email,
       });
       if (resp.statusCode == 201 || resp.statusCode == 409) {
-        // Created or already exists — fine.
+        // Created or already exists - fine.
       } else {
         print('[eBank] ensureLedgerCustomer: unexpected status ${resp.statusCode}');
       }

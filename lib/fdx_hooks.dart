@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank FDX hooks — FDX Data Provider API access via BFF proxy.
+// eBank FDX hooks - FDX Data Provider API access via BFF proxy.
 // Recipient-style FDX hooks are shared with eOpenCA (openfin8-eopenca);
 // eBank uses the provider-side surface (consents, capability, recipients).
 //
@@ -11,12 +11,12 @@
 // enforces consent, and maps data from Ledger/Payments.
 // eBank's Flutter app uses these hooks for the customer-facing consent
 // management UI (view consents, revoke consent) and admin FDX management.
-// External recipients call FDX directly — eBank does not serve provider APIs.
+// External recipients call FDX directly - eBank does not serve provider APIs.
 
 import 'package:flutter/foundation.dart';
 import 'services.dart';
 
-/// useFdxConsents — fetch customer's FDX consents (as a data provider's customer).
+/// useFdxConsents - fetch customer's FDX consents (as a data provider's customer).
 /// Consents via BFF → FDX consents endpoint.
 class FdxConsentsHook extends ChangeNotifier {
   final BffApiClient fdx;
@@ -68,7 +68,7 @@ class FdxConsentsHook extends ChangeNotifier {
   }
 }
 
-/// useFdxProviders — fetch FDX provider info for admin management.
+/// useFdxProviders - fetch FDX provider info for admin management.
 /// Providers via BFF → FDX providers endpoint.
 class FdxProvidersHook extends ChangeNotifier {
   final BffApiClient fdx;

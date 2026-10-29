@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank landing page — delegates to sentin8's LandingPage.
+// eBank landing page - delegates to sentin8's LandingPage.
 //
 // The shared LandingPage takes runtimeContext + auth separately.
 // eBank's EBankContext wraps both, so we unpack them here.

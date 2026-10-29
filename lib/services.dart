@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank services — BFF proxy access layer
+// eBank services - BFF proxy access layer
 // BFF proxy routes for Ledger, Payments, FDX, DB, Storage.
 // x-sentin8-correlation-id propagation on every proxy call.
 //

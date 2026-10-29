@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank savings & deposit products page — US Checking, US Savings, Shariah, Time Deposit, Wallet.
+// eBank savings & deposit products page - US Checking, US Savings, Shariah, Time Deposit, Wallet.
 // Savings/deposit product views.
 import 'package:flutter/material.dart';
 import '../theme.dart';

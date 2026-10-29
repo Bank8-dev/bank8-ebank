@@ -3,13 +3,13 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank lending product pages — loan, credit card, mortgage, LOC, BNPL, home loan redraw.
+// eBank lending product pages - loan, credit card, mortgage, LOC, BNPL, home loan redraw.
 // Lending product views (loan, credit card, mortgage, LOC, BNPL, home-loan redraw).
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../app_context.dart';
 
-/// Lending products page — displays all lending-type products.
+/// Lending products page - displays all lending-type products.
 /// Each product card opens a detail view specific to that product type.
 class LendingProductsPage extends StatefulWidget {
   final EBankContext appContext;

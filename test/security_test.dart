@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank security tests — authorization boundaries and tenant isolation.
+// eBank security tests - authorization boundaries and tenant isolation.
 // Security tests for authorization boundaries, tenant isolation, FDX security.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ebank/bootstrap.dart';
@@ -58,7 +58,7 @@ void main() {
 
     test('Cross-tenant scope isolation', () {
       // A customer in tenant A should not have access to tenant B's data
-      // This is enforced by DB RLS — the client can only request data
+      // This is enforced by DB RLS - the client can only request data
       // within its own org_id/env_id context.
       const tenantAScopes = ['bank8:ledger:read'];
       const tenantBScopes = ['bank8:ledger:read'];
@@ -92,7 +92,7 @@ void main() {
 }
 
 /// Public wrapper for the private _extractDomain function in bootstrap.dart.
-/// In production, this is not exposed — we test the behavior indirectly.
+/// In production, this is not exposed - we test the behavior indirectly.
 String _extractDomainPublic(String hostname) {
   final appIndex = hostname.indexOf('.app.');
   if (appIndex == -1) {
@@ -100,7 +100,7 @@ String _extractDomainPublic(String hostname) {
     if (sentin8Index != -1) return 'local.sentin8.dev';
     return 'local.sentin8.dev';
   }
-  // Strip the '.app.' prefix (5 chars) — everything after it is the platform
+  // Strip the '.app.' prefix (5 chars) - everything after it is the platform
   // domain (e.g. 'prod.acme.ebank.app.local.sentin8.dev' → 'local.sentin8.dev').
   return hostname.substring(appIndex + 5);
 }

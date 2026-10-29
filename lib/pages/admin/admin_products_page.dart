@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank admin product management page — browse 13 Ledger products, activate/deactivate, override params.
+// eBank admin product management page - browse 13 Ledger products, activate/deactivate, override params.
 // Admin product management via the Ledger admin API.
 import 'package:flutter/material.dart';
 import '../../theme.dart';

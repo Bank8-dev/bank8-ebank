@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank product catalog page — browse all Ledger products with key info.
+// eBank product catalog page - browse all Ledger products with key info.
 // Shows interest rates, fees, limits, and denomination on each card.
 // Each card has an "Open Account" button that navigates to the detail page.
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ import '../url_router.dart';
 import '../app_context.dart';
 import 'product_detail_page.dart';
 
-/// Product catalog page — browse all Ledger products.
+/// Product catalog page - browse all Ledger products.
 /// Shows key product info (interest rate, fees, limits, denomination) on cards.
 /// Each card has an "Open Account" button.
 class ProductCatalogPage extends StatefulWidget {

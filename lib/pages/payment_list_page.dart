@@ -3,8 +3,8 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank payment list page — external payment history from Payments.
-// Payment list — payments and payee history via the payments API.
+// eBank payment list page - external payment history from Payments.
+// Payment list - payments and payee history via the payments API.
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../app_context.dart';

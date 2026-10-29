@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank hooks — Sentin8 Flutter SDK hooks adapted for eBank's BFF proxy pattern.
+// eBank hooks - Sentin8 Flutter SDK hooks adapted for eBank's BFF proxy pattern.
 // Data hooks over the BFF proxy clients (accounts, balances, transactions,
 // payments, payees).
 //
@@ -30,7 +30,7 @@ class DataState<T> {
   bool get hasData => data != null;
 }
 
-/// useAccounts — fetch customer accounts from Ledger via BFF proxy.
+/// useAccounts - fetch customer accounts from Ledger via BFF proxy.
 /// Account list via BFF → Ledger GET /v1/accounts.
 class AccountsHook extends ChangeNotifier {
   final BffApiClient ledger;
@@ -63,7 +63,7 @@ class AccountsHook extends ChangeNotifier {
   }
 }
 
-/// useBalances — fetch account balances from Ledger via BFF proxy.
+/// useBalances - fetch account balances from Ledger via BFF proxy.
 /// Balances via BFF → Ledger GET /v1/accounts/{id}/balances.
 class BalancesHook extends ChangeNotifier {
   final BffApiClient ledger;
@@ -92,7 +92,7 @@ class BalancesHook extends ChangeNotifier {
   }
 }
 
-/// useTransactions — fetch transaction history for an account.
+/// useTransactions - fetch transaction history for an account.
 /// Transactions via BFF → Ledger GET /v1/accounts/{id}/transactions.
 class TransactionsHook extends ChangeNotifier {
   final BffApiClient ledger;
@@ -155,7 +155,7 @@ class TransactionsHook extends ChangeNotifier {
   }
 }
 
-/// usePayments — fetch payment history from Payments via BFF proxy.
+/// usePayments - fetch payment history from Payments via BFF proxy.
 /// Payments via BFF → Payments GET /v1/payments.
 class PaymentsHook extends ChangeNotifier {
   final BffApiClient payments;
@@ -188,7 +188,7 @@ class PaymentsHook extends ChangeNotifier {
   }
 }
 
-/// usePayees — fetch payee list from Payments via BFF proxy.
+/// usePayees - fetch payee list from Payments via BFF proxy.
 /// Payees via BFF → Payments GET /v1/account-links.
 class PayeesHook extends ChangeNotifier {
   final BffApiClient payments;

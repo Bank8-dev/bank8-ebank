@@ -3,7 +3,7 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank contract tests — Flutter-BFF and BFF-service boundary contract validation.
+// eBank contract tests - Flutter-BFF and BFF-service boundary contract validation.
 // Contract tests for all proxy routes.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ebank/services.dart';
@@ -26,7 +26,7 @@ void main() {
     });
 
     test('Ledger client builds correct proxy URL', () {
-      // The actual URL is built internally — we test the service name mapping
+      // The actual URL is built internally - we test the service name mapping
       expect(ledger.serviceName, equals('bank8-ledger'));
     });
 
@@ -72,7 +72,7 @@ void main() {
     test('generateCorrelationId produces non-empty string', () {
       final id = generateCorrelationId();
       expect(id, isNotEmpty);
-      // SDK default prefix is 'app' (correlation.dart) — callers pass their
+      // SDK default prefix is 'app' (correlation.dart) - callers pass their
       // own prefix (e.g. eBank's logger uses 'ebk') at call sites.
       expect(id, startsWith('app-'));
     });
@@ -82,7 +82,7 @@ void main() {
       for (var i = 0; i < 100; i++) {
         ids.add(generateCorrelationId());
       }
-      // IDs carry a random suffix (correlation.dart) — all must be unique,
+      // IDs carry a random suffix (correlation.dart) - all must be unique,
       // even when iterations share a millisecond timestamp.
       expect(ids.length, equals(100));
     });
