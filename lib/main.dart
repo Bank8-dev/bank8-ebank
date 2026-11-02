@@ -102,7 +102,7 @@ class _EBankAppState extends State<EBankApp> {
     final uri = Uri.parse(settings.name ?? '/');
     final segments = uri.pathSegments;
 
-    // /admin, /admin/products, /admin/fdx
+    // /admin, /admin/products, /admin/open-banking
     if (segments.isNotEmpty && segments.first == 'admin') {
       return MaterialPageRoute(
         builder: (_) => EBankContextProvider(

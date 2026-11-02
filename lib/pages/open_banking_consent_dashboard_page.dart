@@ -3,29 +3,29 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank FDX consent dashboard - customer view of who has access to their data.
+// eBank open-banking consent dashboard - customer view of who has access to their data.
 // FDX consent dashboard - view and revoke data-sharing consents.
 import 'package:flutter/material.dart';
 import '../theme.dart';
 import '../app_context.dart';
-import '../fdx_hooks.dart';
+import '../open_banking_hooks.dart';
 
-class FdxConsentDashboardPage extends StatefulWidget {
+class OpenBankingConsentDashboardPage extends StatefulWidget {
   final EBankContext appContext;
 
-  const FdxConsentDashboardPage({super.key, required this.appContext});
+  const OpenBankingConsentDashboardPage({super.key, required this.appContext});
 
   @override
-  State<FdxConsentDashboardPage> createState() => _FdxConsentDashboardPageState();
+  State<OpenBankingConsentDashboardPage> createState() => _OpenBankingConsentDashboardPageState();
 }
 
-class _FdxConsentDashboardPageState extends State<FdxConsentDashboardPage> {
-  late FdxConsentsHook _consentsHook;
+class _OpenBankingConsentDashboardPageState extends State<OpenBankingConsentDashboardPage> {
+  late OpenBankingConsentsHook _consentsHook;
 
   @override
   void initState() {
     super.initState();
-    _consentsHook = FdxConsentsHook(widget.appContext.services!.fdx);
+    _consentsHook = OpenBankingConsentsHook(widget.appContext.services!.openBanking);
     _consentsHook.fetch();
   }
 

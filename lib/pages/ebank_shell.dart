@@ -24,10 +24,10 @@ import 'lending_products_page.dart';
 import 'savings_products_page.dart';
 import 'statements_page.dart';
 import 'messages_page.dart';
-import 'fdx_consent_dashboard_page.dart';
+import 'open_banking_consent_dashboard_page.dart';
 import 'admin/admin_dashboard_page.dart';
 import 'admin/admin_products_page.dart';
-import 'admin/admin_fdx_page.dart';
+import 'admin/admin_open_banking_page.dart';
 
 /// Main app shell with navigation.
 /// Shows landing page when signed out, dashboard when signed in.
@@ -145,8 +145,8 @@ class _EBankShellState extends State<EBankShell> {
       case '/statements':
         content = StatementsPage(appContext: appContext);
         break;
-      case '/fdx/consents':
-        content = FdxConsentDashboardPage(appContext: appContext);
+      case '/open-banking/consents':
+        content = OpenBankingConsentDashboardPage(appContext: appContext);
         break;
       case '/messages':
         content = MessagesPage(appContext: appContext, sseClient: _sseClient);
@@ -161,9 +161,9 @@ class _EBankShellState extends State<EBankShell> {
             ? AdminProductsPage(appContext: appContext)
             : const _AccessDeniedPage();
         break;
-      case '/admin/fdx':
+      case '/admin/open-banking':
         content = isAdmin
-            ? AdminFdxPage(appContext: appContext)
+            ? AdminOpenBankingPage(appContext: appContext)
             : const _AccessDeniedPage();
         break;
       default:
@@ -295,7 +295,7 @@ class _EBankShellState extends State<EBankShell> {
                   _NavItem(
                     icon: Icons.shield_outlined,
                     label: 'Data Sharing',
-                    route: '/fdx/consents',
+                    route: '/open-banking/consents',
                     current: _currentRoute,
                     onTap: _navigate,
                   ),
@@ -324,8 +324,8 @@ class _EBankShellState extends State<EBankShell> {
                     ),
                     _NavItem(
                       icon: Icons.shield_outlined,
-                      label: 'Admin: FDX',
-                      route: '/admin/fdx',
+                      label: 'Admin: Open Banking',
+                      route: '/admin/open-banking',
                       current: _currentRoute,
                       onTap: _navigate,
                     ),

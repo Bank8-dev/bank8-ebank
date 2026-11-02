@@ -3,31 +3,31 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank admin FDX page - provider profile, recipient registration, consent monitoring.
-// Admin FDX provider management - provider profile, recipients, consents.
+// eBank admin open-banking page - provider profile, recipient registration, consent monitoring.
+// Admin open-banking provider management - provider profile, recipients, consents.
 import 'package:flutter/material.dart';
 import '../../theme.dart';
 import '../../app_context.dart';
-import '../../fdx_hooks.dart';
+import '../../open_banking_hooks.dart';
 
-class AdminFdxPage extends StatefulWidget {
+class AdminOpenBankingPage extends StatefulWidget {
   final EBankContext appContext;
 
-  const AdminFdxPage({super.key, required this.appContext});
+  const AdminOpenBankingPage({super.key, required this.appContext});
 
   @override
-  State<AdminFdxPage> createState() => _AdminFdxPageState();
+  State<AdminOpenBankingPage> createState() => _AdminOpenBankingPageState();
 }
 
-class _AdminFdxPageState extends State<AdminFdxPage> {
-  late FdxProvidersHook _providersHook;
-  late FdxRecipientsHook _recipientsHook;
+class _AdminOpenBankingPageState extends State<AdminOpenBankingPage> {
+  late OpenBankingProvidersHook _providersHook;
+  late OpenBankingRecipientsHook _recipientsHook;
 
   @override
   void initState() {
     super.initState();
-    _providersHook = FdxProvidersHook(widget.appContext.services!.fdx);
-    _recipientsHook = FdxRecipientsHook(widget.appContext.services!.fdx);
+    _providersHook = OpenBankingProvidersHook(widget.appContext.services!.openBanking);
+    _recipientsHook = OpenBankingRecipientsHook(widget.appContext.services!.openBanking);
     _providersHook.fetch();
     _recipientsHook.fetch();
   }
@@ -48,7 +48,7 @@ class _AdminFdxPageState extends State<AdminFdxPage> {
                   onPressed: () => Navigator.pop(context),
                 ),
                 const SizedBox(width: Sentin8Spacing.sm),
-                const Text('FDX Provider Admin', style: Sentin8Text.headlineLarge),
+                const Text('Open Banking Provider Admin', style: Sentin8Text.headlineLarge),
               ],
             ),
             const SizedBox(height: Sentin8Spacing.lg),
@@ -77,7 +77,7 @@ class _AdminFdxPageState extends State<AdminFdxPage> {
               _infoRow('Brand Name', data['brandName'] as String? ?? 'eBank'),
               _infoRow('Issuer URL', data['issuer'] as String? ?? ' - '),
               _infoRow('JWKS URL', data['jwksUri'] as String? ?? ' - '),
-              _infoRow('FDX Version', data['fdxVersion'] as String? ?? '6.5'),
+              _infoRow('FDX Protocol Version', data['fdxVersion'] as String? ?? '6.5'),
               _infoRow('Status', data['status'] as String? ?? 'available'),
             ],
           ),
@@ -146,7 +146,7 @@ class _AdminFdxPageState extends State<AdminFdxPage> {
           const SizedBox(height: Sentin8Spacing.md),
           const Text(
             'Consent monitoring shows active consent grants, revocation events, '
-            'and authorization rates. Updated in real-time from FDX.',
+            'and authorization rates. Updated in real-time from OpenFin8.',
             style: Sentin8Text.labelSmall,
           ),
         ],

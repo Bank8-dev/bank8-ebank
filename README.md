@@ -28,7 +28,8 @@ databases or object storage, and must derive its entire runtime wiring from
 the Sentin8:App instance it was installed for. eBank demonstrates the full
 "customer + provider" side of open banking: the customer both banks and
 grants/revokes consent for external FDX data recipients, while the financial
-source of truth remains Bank8:Ledger/Bank8:Payments behind Bank8:FDX.
+source of truth remains Bank8:Ledger/Bank8:Payments; open
+banking rides OpenFin8.
 
 ## 3. Architecture & High-Level Design
 
@@ -42,7 +43,7 @@ graph TD
     subgraph SGcvnbup["Via Sentin8:BFF - session cookie, tokens server-side"]
         S --> L[bank8-ledger]
         S --> P[bank8-payments]
-        S --> F[bank8-fdx]
+        S --> F[OpenFin8:CA<br/>(open banking)]
         S --> D[db]
         S --> ST[storage]
         S --> PO[post]

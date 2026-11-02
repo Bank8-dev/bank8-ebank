@@ -13,7 +13,7 @@
 ## Inter-Service Token Verification
 - [ ] All Sentin8:BFF → Bank8:Ledger calls include Sentin8:Auth-issued access token
 - [ ] All Sentin8:BFF → Bank8:Payments calls include Sentin8:Auth-issued access token
-- [ ] All Sentin8:BFF → Bank8:FDX calls include Sentin8:Auth-issued access token
+- [ ] All Sentin8:BFF → OpenFin8 calls include Sentin8:Auth-issued access token
 - [ ] All Sentin8:BFF → Sentin8:DB calls include Sentin8:Auth-issued access token
 - [ ] All Sentin8:BFF → Sentin8:Storage calls include Sentin8:Auth-issued access token
 - [ ] No unauthenticated requests accepted

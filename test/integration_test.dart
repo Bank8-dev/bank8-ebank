@@ -55,8 +55,8 @@ void main() {
       final services = EBankServices(
         bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev',
       );
-      expect(services.fdx, isNotNull);
-      expect(services.fdx.serviceName, equals('openfin8-ca'));
+      expect(services.openBanking, isNotNull);
+      expect(services.openBanking.serviceName, equals('openfin8-ca'));
     });
   });
 
@@ -66,7 +66,7 @@ void main() {
       final services = EBankServices(
         bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev',
       );
-      expect(services.fdx, isNotNull);
+      expect(services.openBanking, isNotNull);
       expect(services.ledger, isNotNull); // FDX maps data from Ledger
       expect(services.payments, isNotNull); // FDX maps money movement from Payments
     });
@@ -79,7 +79,7 @@ void main() {
         bffBaseUrl: 'https://bff.bank8-ebank.prod.acme.local.sentin8.dev',
       );
       // FDX receives the write request, validates consent, calls Payments
-      expect(services.fdx, isNotNull);
+      expect(services.openBanking, isNotNull);
       // Payments orchestrates and calls Ledger for postings
       expect(services.payments, isNotNull);
     });

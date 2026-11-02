@@ -4,7 +4,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 // eBank services - BFF proxy access layer
-// BFF proxy routes for Ledger, Payments, FDX, DB, Storage.
+// BFF proxy routes for Ledger, Payments, Open Banking (OpenFin8), DB,
+// Storage.
 // x-sentin8-correlation-id propagation on every proxy call.
 //
 // BffApiClient and ApiResponse are re-exported from sentin8.
@@ -23,7 +24,10 @@ import 'package:sentin8/sentin8.dart';
 class EBankServices {
   final BffApiClient ledger;
   final BffApiClient payments;
-  final BffApiClient fdx;
+  /// Open banking rides OpenFin8 - the per-jurisdiction FDX provider
+  // surfaces are openfin8-ca/us/uk/eu (here: the Canada deployment the
+  // eBank app is scoped to).
+  final BffApiClient openBanking;
   final BffApiClient db;
   final BffApiClient storage;
   final BffApiClient post;
@@ -31,7 +35,7 @@ class EBankServices {
   EBankServices._({
     required this.ledger,
     required this.payments,
-    required this.fdx,
+    required this.openBanking,
     required this.db,
     required this.storage,
     required this.post,
@@ -47,7 +51,7 @@ class EBankServices {
     return EBankServices._(
       ledger: BffApiClient(bffBaseUrl: base, serviceName: 'bank8-ledger', csrfToken: csrfToken, correlationId: correlationId),
       payments: BffApiClient(bffBaseUrl: base, serviceName: 'bank8-payments', csrfToken: csrfToken, correlationId: correlationId),
-      fdx: BffApiClient(bffBaseUrl: base, serviceName: 'openfin8-ca', csrfToken: csrfToken, correlationId: correlationId),
+      openBanking: BffApiClient(bffBaseUrl: base, serviceName: 'openfin8-ca', csrfToken: csrfToken, correlationId: correlationId),
       db: BffApiClient(bffBaseUrl: base, serviceName: 'db', csrfToken: csrfToken, correlationId: correlationId),
       storage: BffApiClient(bffBaseUrl: base, serviceName: 'storage', csrfToken: csrfToken, correlationId: correlationId),
       post: BffApiClient(bffBaseUrl: base, serviceName: 'post', csrfToken: csrfToken, correlationId: correlationId),

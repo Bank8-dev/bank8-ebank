@@ -54,7 +54,7 @@ void main() {
       );
       expect(services.ledger.serviceName, equals('bank8-ledger'));
       expect(services.payments.serviceName, equals('bank8-payments'));
-      expect(services.fdx.serviceName, equals('openfin8-ca'));
+      expect(services.openBanking.serviceName, equals('openfin8-ca'));
       expect(services.db.serviceName, equals('db'));
       expect(services.storage.serviceName, equals('storage'));
       expect(services.post.serviceName, equals('post'));

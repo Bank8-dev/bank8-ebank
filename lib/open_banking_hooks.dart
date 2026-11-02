@@ -3,27 +3,27 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-// eBank FDX hooks - FDX Data Provider API access via BFF proxy.
+// eBank open-banking hooks - FDX Data Provider API access via BFF proxy.
 // Recipient-style FDX hooks are shared with eOpenCA (openfin8-eopenca);
 // eBank uses the provider-side surface (consents, capability, recipients).
 //
-// eBank is an FDX Data Provider. FDX hosts the /fdx/v6 provider routes,
-// enforces consent, and maps data from Ledger/Payments.
+// eBank is an FDX data provider. OpenFin8 serves the /fdx/v6 provider routes,
+// enforces consent, and maps data from Ledger/Payments - OpenFin8 is the\n// open-banking vertical in every jurisdiction.
 // eBank's Flutter app uses these hooks for the customer-facing consent
-// management UI (view consents, revoke consent) and admin FDX management.
+// management UI (view consents, revoke consent) and admin open-banking management.
 // External recipients call FDX directly - eBank does not serve provider APIs.
 
 import 'package:flutter/foundation.dart';
 import 'services.dart';
 
-/// useFdxConsents - fetch customer's FDX consents (as a data provider's customer).
+/// useOpenBankingConsents - fetch the customer's open-banking consents (as a data provider's customer).
 /// Consents via BFF → FDX consents endpoint.
-class FdxConsentsHook extends ChangeNotifier {
-  final BffApiClient fdx;
+class OpenBankingConsentsHook extends ChangeNotifier {
+  final BffApiClient openBanking;
 
   DataState<List<Map<String, dynamic>>> _state = const DataState();
 
-  FdxConsentsHook(this.fdx);
+  OpenBankingConsentsHook(this.openBanking);
 
   DataState<List<Map<String, dynamic>>> get state => _state;
   List<Map<String, dynamic>> get consents => _state.data ?? [];
@@ -32,7 +32,7 @@ class FdxConsentsHook extends ChangeNotifier {
     _state = const DataState(isLoading: true);
     notifyListeners();
     try {
-      final response = await fdx.get('/fdx/v6/consents');
+      final response = await openBanking.get('/fdx/v6/consents');
       if (response.isSuccess && response.data != null) {
         final consents = (response.data!['data'] as List<dynamic>?)
                 ?.map((e) => e as Map<String, dynamic>)
@@ -52,7 +52,7 @@ class FdxConsentsHook extends ChangeNotifier {
   Future<bool> revoke(String consentId, {String reason = 'USER_ACTION'}) async {
     final idempotencyKey = 'rvk-${DateTime.now().millisecondsSinceEpoch}';
     try {
-      final response = await fdx.put(
+      final response = await openBanking.put(
         '/fdx/v6/consents/$consentId/revocation',
         body: {
           'reason': reason,
@@ -68,14 +68,14 @@ class FdxConsentsHook extends ChangeNotifier {
   }
 }
 
-/// useFdxProviders - fetch FDX provider info for admin management.
+/// useOpenBankingProviders - fetch open-banking provider info for admin management.
 /// Providers via BFF → FDX providers endpoint.
-class FdxProvidersHook extends ChangeNotifier {
-  final BffApiClient fdx;
+class OpenBankingProvidersHook extends ChangeNotifier {
+  final BffApiClient openBanking;
 
   DataState<Map<String, dynamic>> _state = const DataState();
 
-  FdxProvidersHook(this.fdx);
+  OpenBankingProvidersHook(this.openBanking);
 
   DataState<Map<String, dynamic>> get state => _state;
 
@@ -83,7 +83,7 @@ class FdxProvidersHook extends ChangeNotifier {
     _state = const DataState(isLoading: true);
     notifyListeners();
     try {
-      final response = await fdx.get('/fdx/v6/capability');
+      final response = await openBanking.get('/fdx/v6/capability');
       if (response.isSuccess && response.data != null) {
         _state = DataState(data: response.data!);
       } else {
@@ -98,12 +98,12 @@ class FdxProvidersHook extends ChangeNotifier {
 
 /// FDX recipient registration hook for admin use.
 /// Recipient registration through FDX.
-class FdxRecipientsHook extends ChangeNotifier {
-  final BffApiClient fdx;
+class OpenBankingRecipientsHook extends ChangeNotifier {
+  final BffApiClient openBanking;
 
   DataState<List<Map<String, dynamic>>> _state = const DataState();
 
-  FdxRecipientsHook(this.fdx);
+  OpenBankingRecipientsHook(this.openBanking);
 
   DataState<List<Map<String, dynamic>>> get state => _state;
   List<Map<String, dynamic>> get recipients => _state.data ?? [];
@@ -113,7 +113,7 @@ class FdxRecipientsHook extends ChangeNotifier {
     notifyListeners();
     try {
       // FDX admin API for recipient registration overview
-      final response = await fdx.get('/v1/admin/recipients');
+      final response = await openBanking.get('/v1/admin/recipients');
       if (response.isSuccess && response.data != null) {
         final recipients = (response.data!['data'] as List<dynamic>?)
                 ?.map((e) => e as Map<String, dynamic>)

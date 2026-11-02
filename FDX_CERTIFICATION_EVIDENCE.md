@@ -45,8 +45,8 @@ Status: All evidence produced - ready for certification review
 
 | Metric | Source | Status |
 |--------|--------|--------|
-| `/capability` endpoint | Bank8:FDX route-flag-driven | ✅ Accurate |
-| `/availability` endpoint | Bank8:FDX route-flag-driven | ✅ Accurate |
+| `/capability` endpoint | OpenFin8:CA route-flag-driven | ✅ Accurate |
+| `/availability` endpoint | OpenFin8:CA route-flag-driven | ✅ Accurate |
 | `/certification-metrics` endpoint | Computed from real request data | ✅ Accurate |
 | Consent evaluation latency | Measured per provider API request | ✅ Tracked |
 | Token validation failure reasons | Categorized (expired, wrong audience, wrong tenant, etc.) | ✅ Tracked |

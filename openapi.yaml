@@ -13,7 +13,7 @@ info:
     The Flutter app never sees OAuth tokens - Sentin8:BFF holds them server-side.
 
     This contract defines the Sentin8:BFF auth and proxy routes used by the eBank
-    Flutter app. Backend service APIs (Bank8:Ledger, Bank8:Payments, Bank8:FDX, Sentin8:DB, Sentin8:Storage) are
+    Flutter app. Backend service APIs (Bank8:Ledger, Bank8:Payments, OpenFin8:CA, Sentin8:DB, Sentin8:Storage) are
     proxied through Sentin8:BFF under /proxy/{service}/...
 
     DCR is mandatory: every eBank instance registers an OAuth client with
@@ -184,21 +184,21 @@ paths:
         '409':
           description: Idempotency conflict
 
-  /proxy/fdx/{path}:
+  /proxy/openfin8-ca/{path}:
     parameters:
       - name: path
         in: path
         required: true
         schema:
           type: string
-        description: Bank8:FDX API path (e.g. v1/recipient/providers)
+        description: OpenFin8:CA API path (e.g. fdx/v6/consents or v1/recipient/providers)
     get:
-      summary: Proxy to Bank8:FDX (read)
+      summary: Proxy to OpenFin8:CA (read)
       responses:
         '200':
-          description: Bank8:FDX response
+          description: OpenFin8:CA response
     post:
-      summary: Proxy to Bank8:FDX (write)
+      summary: Proxy to OpenFin8:CA (write)
       parameters:
         - name: X-Sentin8:BFF-CSRF
           in: header
@@ -207,7 +207,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Bank8:FDX response
+          description: OpenFin8:CA response
 
   /proxy/db/{path}:
     parameters:
