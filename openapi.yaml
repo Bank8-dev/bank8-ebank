@@ -23,13 +23,21 @@ info:
     name: Proprietary
 
 servers:
-  - url: https://bff.bank8-ebank.{env}.{org}.local.sentin8.dev
+  # The per-instance Sentin8:BFF. The hostname is derived at runtime as
+  # `bff.{app_domain}` where the app domain is
+  # `{app_slug}.{env_slug}.{org_domain}` (org domain = custom domain or
+  # `{org_slug}.{SENTIN8_DOMAIN}`) - never a fixed literal; any
+  # `{SENTIN8_DOMAIN}` value serves, the dev loop's wildcard zone being
+  # one instance.
+  - url: https://bff.bank8-ebank.{env_slug}.{org_domain}
     description: Per-instance Sentin8:BFF (eBank)
     variables:
-      env:
+      env_slug:
         default: prod
-      org:
-        default: acme
+        description: instance environment slug
+      org_domain:
+        default: your-org.example.com
+        description: 'org custom domain or {org_slug}.{SENTIN8_DOMAIN}'
 
 paths:
   /auth/login:
@@ -142,7 +150,7 @@ paths:
         '200':
           description: Bank8:Ledger response
         '403':
-          description: Scope denied (requires ledger: prefix scope)
+          description: 'Scope denied (requires ledger: prefix scope)'
     post:
       summary: Proxy to Bank8:Ledger (write)
       parameters:

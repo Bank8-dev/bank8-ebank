@@ -20,16 +20,16 @@ void main() {
 
     test('_extractDomain extracts from app hostname', () {
       // Test via fetchRuntimeContext's internal helper (indirectly)
-      // hostname "prod.acme.ebank.app.local.sentin8.dev" should extract "local.sentin8.dev"
-      final hostname = 'prod.acme.ebank.app.local.sentin8.dev';
+      // hostname "prod.acme.ebank.app.example.com" should extract "example.com"
+      final hostname = 'prod.acme.ebank.app.example.com';
       final domain = _extractDomainPublic(hostname);
-      expect(domain, equals('local.sentin8.dev'));
+      expect(domain, equals('example.com'));
     });
 
     test('_extractDomain handles missing app segment', () {
-      final hostname = 'ebank.local.sentin8.dev';
+      final hostname = 'ebank.example.com';
       final domain = _extractDomainPublic(hostname);
-      expect(domain, equals('local.sentin8.dev'));
+      expect(domain, equals('example.com'));
     });
   });
 
@@ -93,15 +93,19 @@ void main() {
 
 /// Public wrapper for the private _extractDomain function in bootstrap.dart.
 /// In production, this is not exposed - we test the behavior indirectly.
+/// Domain-agnostic: the platform domain is whatever the hostname carries
+/// (derives from SENTIN8_DOMAIN at boot; the test uses a neutral example).
 String _extractDomainPublic(String hostname) {
   final appIndex = hostname.indexOf('.app.');
   if (appIndex == -1) {
-    final sentin8Index = hostname.indexOf('.sentin8.');
-    if (sentin8Index != -1) return 'local.sentin8.dev';
-    return 'local.sentin8.dev';
+    // No app segment: the first label is the app slug - everything after
+    // it is the domain (e.g. 'ebank.example.com' -> 'example.com').
+    final firstDot = hostname.indexOf('.');
+    if (firstDot == -1) return hostname;
+    return hostname.substring(firstDot + 1);
   }
   // Strip the '.app.' prefix (5 chars) - everything after it is the platform
-  // domain (e.g. 'prod.acme.ebank.app.local.sentin8.dev' → 'local.sentin8.dev').
+  // domain (e.g. 'prod.acme.ebank.app.example.com' -> 'example.com').
   return hostname.substring(appIndex + 5);
 }
 
