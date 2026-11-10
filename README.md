@@ -43,7 +43,7 @@ graph TD
     subgraph SGcvnbup["Via Sentin8:BFF - session cookie, tokens server-side"]
         S --> L[bank8-ledger]
         S --> P[bank8-payments]
-        S --> F[OpenFin8:CA<br/>(open banking)]
+        S --> F["OpenFin8<br/>(open banking)"]
         S --> D[db]
         S --> ST[storage]
         S --> PO[post]

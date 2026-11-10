@@ -17,7 +17,7 @@ product activation, FDX provider administration); the app's listing manifest
 **What eBank does NOT own (delegates):** identity and consent issuance
 (Sentin8:Auth); financial truth (Bank8:Ledger); payment orchestration
 (Bank8:Payments); the FDX provider gateway and consent enforcement
-(OpenFin8:CA - the open-banking vertical); persistence (Sentin8:DB, via BFF); object storage (storage,
+(OpenFin8 - the open-banking vertical); persistence (Sentin8:DB, via BFF); object storage (storage,
 via BFF); notifications (post, via BFF); session/token custody (Sentin8:BFF);
 policy decisions (Shield within each backend service).
 
@@ -29,7 +29,7 @@ graph TD
     BFF --> AUTH1[Sentin8:Auth]
     BFF --> LED[Bank8:Ledger]
     BFF --> PAY[Bank8:Payments]
-    BFF --> FDX[OpenFin8:CA<br/>(open banking)]
+    BFF --> FDX["OpenFin8<br/>(open banking)"]
     BFF --> DB[db]
     BFF --> STG[storage]
     BFF --> POST[post]
@@ -105,7 +105,7 @@ service-owned and referenced by id:
 | Accounts, balances, postings, statements | Bank8:Ledger | read via proxy; account opening via `POST /v1/accounts` |
 | Products (open product factory: ready-made blueprints - current, savings, US checking/savings, Shariah savings, time deposit, loan, credit card, mortgage, LOC, wallet, BNPL, home-loan redraw - plus any bank-created type; the catalog is data, not an enum) | Bank8:Ledger | read via `GET /v1/products`; admin activation/override via `POST /v1/products/{id}/versions` |
 | Payments, account links (payees) | Bank8:Payments | read via `GET /v1/payments`, `GET /v1/account-links` |
-| Provider profile, recipients, open-banking consents | OpenFin8:CA | read/revoke via `/fdx/v6/*` + `/v1/admin/recipients` |
+| Provider profile, recipients, open-banking consents | OpenFin8 | read/revoke via `/fdx/v6/*` + `/v1/admin/recipients` |
 | Statement objects | storage | signed-read URLs only (`POST /v1/storage/sign-read`) |
 | Notifications | post | inbox read + mark-read (`/v1/messages*`) |
 
