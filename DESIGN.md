@@ -103,7 +103,7 @@ service-owned and referenced by id:
 |---|---|---|
 | Customer record | Bank8:Ledger `ledger.customers` | created idempotently via `ensureLedgerCustomer` (`POST /v1/customers`, `409` tolerated) |
 | Accounts, balances, postings, statements | Bank8:Ledger | read via proxy; account opening via `POST /v1/accounts` |
-| Products (13 product libraries incl. current, savings, US checking/savings, Shariah savings, time deposit, loan, credit card, mortgage, LOC, wallet, BNPL, home-loan redraw) | Bank8:Ledger | read via `GET /v1/products`; admin activation/override via `POST /v1/products/{id}/versions` |
+| Products (open product factory: ready-made blueprints - current, savings, US checking/savings, Shariah savings, time deposit, loan, credit card, mortgage, LOC, wallet, BNPL, home-loan redraw - plus any bank-created type; the catalog is data, not an enum) | Bank8:Ledger | read via `GET /v1/products`; admin activation/override via `POST /v1/products/{id}/versions` |
 | Payments, account links (payees) | Bank8:Payments | read via `GET /v1/payments`, `GET /v1/account-links` |
 | Provider profile, recipients, open-banking consents | OpenFin8:CA | read/revoke via `/fdx/v6/*` + `/v1/admin/recipients` |
 | Statement objects | storage | signed-read URLs only (`POST /v1/storage/sign-read`) |
@@ -122,7 +122,7 @@ app itself has no listening port.
 | Dashboard | `GET /proxy/bank8-ledger/v1/accounts` | customer session | overview + balances |
 | Account list/detail | `GET /v1/accounts`, `GET /v1/accounts/{id}`, `GET /v1/accounts/{id}/balances` | customer session | detail + balances |
 | Transactions | `GET /v1/accounts/{id}/transactions?pageKey=…` | customer session | paged cursor |
-| Products | `GET /v1/products` | customer session | catalog (13 products) |
+| Products | `GET /v1/products` | customer session | catalog (data-driven, no fixed list) |
 | Account opening | `POST /v1/accounts` (+ idempotent `POST /v1/customers` first) | customer session; `ledger:accounts:write` | product enrollment |
 | Transfer | `POST /v1/postings` (`batch_id`, `idempotency_key`, `instructions[{instruction_type: transfer, …}]`) | customer session; `ledger:postings:write` | money movement (Ledger) |
 | Payments history | `GET /proxy/bank8-payments/v1/payments`, `GET /v1/account-links` | customer session | payee + payment view |

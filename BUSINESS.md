@@ -20,8 +20,8 @@
 | Capability | Delivered through |
 |---|---|
 | Customer sign-up / sign-in via hosted identity UI | Sentin8:Auth (BFF-brokered) |
-| Product catalog browsing (13 ledger products) | Bank8:Ledger |
-| Account opening (current, savings, US checking/savings, Shariah savings, time deposit, loan, credit card, mortgage, line of credit, wallet, BNPL, home-loan redraw) | Bank8:Ledger |
+| Product catalog browsing (any active ledger product - the catalog is data, not a fixed list) | Bank8:Ledger |
+| Account opening (any active product: current, savings, US checking/savings, Shariah savings, time deposit, loan, credit card, mortgage, line of credit, wallet, BNPL, home-loan redraw - or a bank-created type nobody has shipped yet) | Bank8:Ledger |
 | Balances and transaction history (paged) | Bank8:Ledger |
 | Internal transfers between own accounts | Bank8:Ledger postings |
 | External payments & payee history view | Bank8:Payments |
