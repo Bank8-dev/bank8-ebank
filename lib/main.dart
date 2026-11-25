@@ -16,16 +16,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
-import 'package:web/web.dart' as web;
+import 'platform/platform.dart';
 import 'theme.dart';
 import 'app_context.dart';
 import 'bootstrap.dart';
 import 'pages/pages.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Enable semantics for e2e/Playwright ARIA access (per memory notes)
   SemanticsBinding.instance.ensureSemantics();
+  // Native: prime the enrolled instance origin from disk before any network
+  // call. No-op on web, where the origin comes from the address bar.
+  await loadAppOrigin();
   runApp(const EBankApp());
 }
 
@@ -43,6 +46,12 @@ class _EBankAppState extends State<EBankApp> {
   AppRuntimeContext? _runtimeContext;
   String? _bootstrapError;
 
+  /// True when the app has no enrolled instance origin yet.
+  ///
+  /// Web never sets this (the address bar is the origin); on native it is the
+  /// first-run state and the user is shown the pairing screen.
+  bool _bootstrapNeedsEnrollment = false;
+
   @override
   void initState() {
     super.initState();
@@ -53,8 +62,21 @@ class _EBankAppState extends State<EBankApp> {
     try {
       // Use the app's own origin so the TLS proxy injects the correct
       // X-Sentin8-Hostname header for runtime context resolution.
-      final appBaseUrl = web.window.location.origin;
-      final ctx = await fetchRuntimeContext(appBaseUrl: appBaseUrl);
+      //
+      // Web: the address bar. Native: the origin persisted at enrollment; a
+      // null value is not an error, it is the un-enrolled first-run state
+      // (WS9 shows the pairing screen).
+      final origin = appOrigin;
+      if (origin == null || origin.isEmpty) {
+        setState(() {
+          _bootstrapNeedsEnrollment = true;
+        });
+        return;
+      }
+      final ctx = await fetchRuntimeContext(
+        appBaseUrl: origin,
+        hostname: Uri.parse(origin).host,
+      );
 
       setState(() {
         _runtimeContext = ctx;
@@ -85,6 +107,17 @@ class _EBankAppState extends State<EBankApp> {
   Widget _buildHome() {
     if (_bootstrapError != null) {
       return BootstrapErrorPage(error: _bootstrapError!, appName: 'eBank');
+    }
+
+    if (_bootstrapNeedsEnrollment) {
+      return EnrollmentPage(
+        onEnrolled: () {
+          setState(() {
+            _bootstrapNeedsEnrollment = false;
+          });
+          _bootstrap();
+        },
+      );
     }
 
     if (_runtimeContext == null) {

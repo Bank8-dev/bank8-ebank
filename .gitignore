@@ -15,3 +15,9 @@ ios/.symlinks/
 
 # Local environment (never commit secrets/DSNs)
 .env
+
+# IDE / OS noise (flutter create generates these)
+.idea/
+*.iml
+.metadata
+.DS_Store

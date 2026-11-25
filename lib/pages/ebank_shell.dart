@@ -3,11 +3,9 @@
 // SPDX-FileCopyrightText: Copyright Contributors to the Bank8:EBank
 // SPDX-License-Identifier: Apache-2.0
 
-import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-// ignore: avoid_web_libraries_in_flutter
-import 'package:web/web.dart' as web;
+import '../platform/platform.dart';
 import '../theme.dart';
 import '../app_context.dart';
 import '../notification_sse.dart';
@@ -49,11 +47,15 @@ class _EBankShellState extends State<EBankShell> {
   void initState() {
     super.initState();
     _currentRoute = currentRoute();
-    if (kIsWeb) {
-      web.window.onPopState.listen((_) {
-        if (mounted) setState(() { _currentRoute = currentRoute(); });
-      });
-    }
+    // Browser back/forward. Native returns null - the platform back gesture is
+    // handled by PopScope, and there is no URL hash to re-read.
+    browserBackEvents?.listen((_) {
+      if (mounted) {
+        setState(() {
+          _currentRoute = currentRoute();
+        });
+      }
+    });
   }
 
   void _navigate(String route) {

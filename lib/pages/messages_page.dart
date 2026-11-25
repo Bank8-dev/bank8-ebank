@@ -18,9 +18,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'dart:js_interop';
-// ignore: avoid_web_libraries_in_flutter
-import 'package:web/web.dart' as web;
+import '../platform/platform.dart';
 import '../app_context.dart';
 import '../theme.dart';
 import '../notification_sse.dart';
@@ -355,8 +353,8 @@ class _MessageBody extends StatelessWidget {
         recognizer: TapGestureRecognizer()
           ..onTap = () {
             final url = match.group(0)!;
-            // Open in a new browser tab (web only).
-            web.window.open(url, '_blank');
+            // Web: a new tab. Native: the OS browser/app (url_launcher).
+            openExternalUrl(url);
           },
       ));
       lastEnd = match.end;

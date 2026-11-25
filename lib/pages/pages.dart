@@ -6,6 +6,7 @@
 // eBank pages barrel export
 export 'bootstrap_loader_page.dart';
 export 'bootstrap_error_page.dart';
+export 'enrollment_page.dart';
 export 'ebank_shell.dart';
 export 'landing_page.dart';
 export 'dashboard_page.dart';

@@ -9,7 +9,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:web/web.dart' as web;
+import 'platform/platform.dart';
 import 'bootstrap.dart';
 import 'auth_provider.dart';
 import 'services.dart';
@@ -42,10 +42,9 @@ class EBankContext extends ChangeNotifier {
       bffBaseUrl: runtimeContext.bffBaseUrl,
       authDomain: runtimeContext.authDomain,
     );
-    // Wire up redirect callback for web (window.location.href).
-    auth.onRedirect = (String url) {
-      web.window.location.href = url;
-    };
+    // Wire up the OAuth redirect: the address bar on web, the system browser
+    // handoff on native (WS1).
+    auth.onRedirect = redirectToUrl;
     await auth.init();
     return EBankContext._(
       runtimeContext: runtimeContext,
