@@ -68,6 +68,7 @@ class _EBankAppState extends State<EBankApp> {
       // (WS9 shows the pairing screen).
       final origin = appOrigin;
       if (origin == null || origin.isEmpty) {
+        if (!mounted) return;
         setState(() {
           _bootstrapNeedsEnrollment = true;
         });
@@ -78,10 +79,15 @@ class _EBankAppState extends State<EBankApp> {
         hostname: Uri.parse(origin).host,
       );
 
+      // The bootstrap is async: the widget can be disposed while the context
+      // fetch is in flight (test teardown, a fast back-navigation). setState on
+      // a disposed State is a real error, not a warning.
+      if (!mounted) return;
       setState(() {
         _runtimeContext = ctx;
       });
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _bootstrapError = e.toString();
       });
